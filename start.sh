@@ -5,6 +5,8 @@ RUN mix deps.get && \
     npm install && \
     cd ..
 
+mix ecto.create
+
 mix ecto.migrate
 
-mix phx.server
+PORT=$PORT mix phx.server

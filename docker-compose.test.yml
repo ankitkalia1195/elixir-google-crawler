@@ -16,10 +16,10 @@ services:
       context: "."
     ports:
       - "4000:4000"
-    volumes:
-      - .:/app
     environment:
+      - MIX_ENV=test
       - PORT=4000
+    command: ./test.sh
 
 volumes:
     db_data:

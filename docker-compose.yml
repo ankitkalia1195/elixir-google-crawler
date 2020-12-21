@@ -1,7 +1,12 @@
-phoenix:
-  build:
-    context: "."
-  ports:
-    - "4000:4000"
-  environment:
-    MIX_ENV=production
+version: '3.2'
+
+services:
+  phoenix:
+    build:
+      context: "."
+    ports:
+      - "80:80"
+    command: test.sh
+    environment:
+      - MIX_ENV=production
+      - PORT=80
