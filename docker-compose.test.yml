@@ -20,6 +20,8 @@ services:
       - MIX_ENV=test
       - PORT=4000
     command: ./test.sh
+    depends_on:
+      - postgres
 
 volumes:
     db_data:
