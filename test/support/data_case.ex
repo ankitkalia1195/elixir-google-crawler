@@ -16,22 +16,27 @@ defmodule GoogleCrawler.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
+      use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
       alias GoogleCrawler.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
       import GoogleCrawler.DataCase
+      import GoogleCrawler.Factory
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(GoogleCrawler.Repo)
+    :ok = Sandbox.checkout(GoogleCrawler.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(GoogleCrawler.Repo, {:shared, self()})
+      Sandbox.mode(GoogleCrawler.Repo, {:shared, self()})
     end
 
     :ok

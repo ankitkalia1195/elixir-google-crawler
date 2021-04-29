@@ -17,12 +17,17 @@ defmodule GoogleCrawlerWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
+      use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import GoogleCrawlerWeb.ConnCase
+      import GoogleCrawler.Factory
 
       alias GoogleCrawlerWeb.Router.Helpers, as: Routes
 
@@ -32,10 +37,10 @@ defmodule GoogleCrawlerWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(GoogleCrawler.Repo)
+    :ok = Sandbox.checkout(GoogleCrawler.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(GoogleCrawler.Repo, {:shared, self()})
+      Sandbox.mode(GoogleCrawler.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

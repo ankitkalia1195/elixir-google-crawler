@@ -14,7 +14,8 @@ defmodule GoogleCrawler.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: GoogleCrawler.PubSub},
       # Start the Endpoint (http/https)
-      GoogleCrawlerWeb.Endpoint
+      GoogleCrawlerWeb.Endpoint,
+      {Oban, oban_config()}
       # Start a worker by calling: GoogleCrawler.Worker.start_link(arg)
       # {GoogleCrawler.Worker, arg}
     ]
@@ -30,5 +31,10 @@ defmodule GoogleCrawler.Application do
   def config_change(changed, _new, removed) do
     GoogleCrawlerWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  # Conditionally disable crontab, queues, or plugins here.
+  defp oban_config do
+    Application.get_env(:google_crawler, Oban)
   end
 end

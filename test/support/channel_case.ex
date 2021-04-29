@@ -17,11 +17,14 @@ defmodule GoogleCrawlerWeb.ChannelCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
       import GoogleCrawlerWeb.ChannelCase
+      import GoogleCrawler.Factory
 
       # The default endpoint for testing
       @endpoint GoogleCrawlerWeb.Endpoint
@@ -29,10 +32,10 @@ defmodule GoogleCrawlerWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(GoogleCrawler.Repo)
+    :ok = Sandbox.checkout(GoogleCrawler.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(GoogleCrawler.Repo, {:shared, self()})
+      Sandbox.mode(GoogleCrawler.Repo, {:shared, self()})
     end
 
     :ok
