@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :google_crawler, GoogleCrawlerWeb.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: "elixir-google-searcher.herokuapp.com", port: 443],
+  url: [scheme: "https", host: System.get_env("HOST"), port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # Do not print debug messages in production
