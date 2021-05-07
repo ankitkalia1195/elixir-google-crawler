@@ -18,6 +18,7 @@ jobs:
 
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
+          branch: "develop"
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME_STAGING }} #Must be unique in Heroku
           heroku_email: "ankitkalia.dev@gmail.com"
