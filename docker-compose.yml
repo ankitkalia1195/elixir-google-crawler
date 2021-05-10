@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  build:
+    build:
+      context: .
+      cache_from:
+        - google_crawler-build
+      target: build
+    image: google_crawler-build
+
+  app:
+    build:
+      context: .
+      cache_from:
+        - google_crawler-build
+        - google_crawler
+      target: app
+    image: google_crawler
