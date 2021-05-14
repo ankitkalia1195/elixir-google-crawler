@@ -41,6 +41,7 @@ defmodule GoogleCrawler.MixProject do
   defp deps do
     [
       {:wallaby, "~> 0.28.0", [only: :test, runtime: false]},
+      {:bcrypt_elixir, "~> 2.0"},
       {:sobelow, "~> 0.11.1", [only: [:dev, :test], runtime: false]},
       {:exvcr, "~> 0.12.2", [only: :test]},
       {:oban, "~> 2.6.1"},
@@ -61,7 +62,8 @@ defmodule GoogleCrawler.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:nimble_template, "~> 3.0", only: :dev, runtime: false}
+      {:nimble_template, "~> 3.0", only: :dev, runtime: false},
+      {:phx_gen_auth, "~> 0.7", only: :dev, runtime: false}
     ]
   end
 

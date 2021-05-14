@@ -4,6 +4,6 @@ defmodule GoogleCrawlerWeb.HomePage.ViewHomePageTest do
   feature "view home page", %{session: session} do
     visit(session, Routes.page_path(GoogleCrawlerWeb.Endpoint, :index))
 
-    assert_has(session, Query.text("Welcome to Phoenix!"))
+    assert_has(session, Query.text("Welcome to Google Crawler!"))
   end
 end
