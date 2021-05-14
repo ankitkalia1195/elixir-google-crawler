@@ -35,17 +35,7 @@
         excluded: [
           ~r"/_build/",
           ~r"/deps/",
-          ~r"/node_modules/",
-          "lib/google_crawler/accounts/user.ex",
-          "lib/google_crawler/accounts.ex",
-          "lib/google_crawler_web/controllers/user_confirmation_controller.ex",
-          "test/google_crawler/accounts_test.exs",
-          "test/google_crawler_web/controllers/user_auth_test.exs",
-          "test/google_crawler_web/controllers/user_confirmation_controller_test.exs",
-          "test/google_crawler_web/controllers/user_registration_controller_test.exs",
-          "test/google_crawler_web/controllers/user_session_controller_test.exs",
-          "test/google_crawler_web/controllers/user_reset_password_controller_test.exs",
-          "test/google_crawler_web/controllers/user_settings_controller_test.exs"
+          ~r"/node_modules/"
         ]
       },
       #
@@ -188,9 +178,10 @@
         {Credo.Check.Refactor.AppendSingleItem, []},
         {Credo.Check.Refactor.DoubleBooleanNegation, []},
         {Credo.Check.Refactor.ModuleDependencies, false},
-        {Credo.Check.Refactor.NegatedIsNil, []},
+        {Credo.Check.Refactor.NegatedIsNil,
+         files: %{excluded: ["lib/google_crawler_web/controllers/user_confirmation_controller.ex"]}},
         {Credo.Check.Refactor.PipeChainStart, []},
-        {Credo.Check.Refactor.VariableRebinding, []},
+        {Credo.Check.Refactor.VariableRebinding, files: %{excluded: ["**/*_test.exs"]}},
         {Credo.Check.Warning.LeakyEnvironment, []},
         {Credo.Check.Warning.MapGetUnsafePass, []},
         {Credo.Check.Warning.UnsafeToAtom, []}

@@ -1,8 +1,8 @@
 defmodule GoogleCrawlerWeb.UserSettingsControllerTest do
   use GoogleCrawlerWeb.ConnCase, async: true
 
-  alias GoogleCrawler.Accounts
   import GoogleCrawler.AccountsFixtures
+  alias GoogleCrawler.Accounts
 
   setup :register_and_log_in_user
 

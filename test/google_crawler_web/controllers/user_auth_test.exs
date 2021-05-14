@@ -1,9 +1,9 @@
 defmodule GoogleCrawlerWeb.UserAuthTest do
   use GoogleCrawlerWeb.ConnCase, async: true
 
+  import GoogleCrawler.AccountsFixtures
   alias GoogleCrawler.Accounts
   alias GoogleCrawlerWeb.UserAuth
-  import GoogleCrawler.AccountsFixtures
 
   @remember_me_cookie "_google_crawler_web_user_remember_me"
 

@@ -1,9 +1,9 @@
 defmodule GoogleCrawlerWeb.UserConfirmationControllerTest do
   use GoogleCrawlerWeb.ConnCase, async: true
 
+  import GoogleCrawler.AccountsFixtures
   alias GoogleCrawler.Accounts
   alias GoogleCrawler.Repo
-  import GoogleCrawler.AccountsFixtures
 
   setup do
     %{user: user_fixture()}
