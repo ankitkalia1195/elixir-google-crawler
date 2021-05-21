@@ -25,6 +25,12 @@ defmodule GoogleCrawlerWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/", GoogleCrawlerWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    resources "/uploads", UploadController, only: [:new, :create]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", GoogleCrawlerWeb do
   #   pipe_through :api

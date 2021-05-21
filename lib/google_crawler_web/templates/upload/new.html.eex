@@ -1,0 +1,13 @@
+<div class = "upload__form">
+  <h3>Upload a new file!</h3>
+  <%= form_for @conn, "/uploads", [as: :upload, multipart: true], fn f -> %>
+    <div class="form-group">
+      <label></label>
+      <%= file_input f, :file, class: "form-control", accept: ".csv" %>
+    </div>
+
+    <div class="form-group">
+      <%= submit "Upload", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
