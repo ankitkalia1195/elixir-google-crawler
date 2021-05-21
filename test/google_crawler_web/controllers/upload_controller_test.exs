@@ -7,8 +7,10 @@ defmodule GoogleCrawlerWeb.UploadControllerTest do
 
   describe "GET #new" do
     test "renders the new page", %{conn: conn} do
-      response =  get(conn, Routes.upload_path(conn, :new))
-                  |> html_response(200)
+      response =
+        conn
+        |> get(Routes.upload_path(conn, :new))
+        |> html_response(200)
 
       assert response =~ "Upload a new file!"
     end
@@ -20,34 +22,38 @@ defmodule GoogleCrawlerWeb.UploadControllerTest do
 
       post(conn, Routes.upload_path(conn, :create), %{upload: %{file: upload}})
 
-      assert Enum.count(Repo.all(Keyword)) == 2
+      assert Repo.aggregate(Keyword, :count) == 2
     end
 
     test "sets flash message when file is succesfully processed", %{conn: conn} do
       upload = %Plug.Upload{path: "test/support/fixtures/csv/valid.csv", filename: "upload.csv"}
 
-      flash_message = post(conn, Routes.upload_path(conn, :create), %{upload: %{file: upload}})
-                      |> get_flash(:info)
-
+      flash_message =
+        conn
+        |> post(Routes.upload_path(conn, :create), %{upload: %{file: upload}})
+        |> get_flash(:info)
 
       assert flash_message == "File processed successfully"
     end
 
     test "does NOT create keywords when file is NOT succesfully processed", %{conn: conn} do
-      upload = %Plug.Upload{path: "test/support/fixtures/csv/invalid.csv", filename: "invalid_upload.csv"}
+      upload = %Plug.Upload{
+        path: "test/support/fixtures/csv/invalid.csv",
+        filename: "invalid_upload.csv"
+      }
 
       post(conn, Routes.upload_path(conn, :create), %{upload: %{file: upload}})
 
-      assert Enum.count(Repo.all(Keyword)) == 0
+      assert Repo.aggregate(Keyword, :count) == 0
     end
-
 
     test "sets flash message when file is NOT succesfully processed", %{conn: conn} do
       upload = %Plug.Upload{path: "test/support/fixtures/csv/invalid.csv", filename: "upload.csv"}
 
-      flash_message = post(conn, Routes.upload_path(conn, :create), %{upload: %{file: upload}})
-                      |> get_flash(:error)
-
+      flash_message =
+        conn
+        |> post(Routes.upload_path(conn, :create), %{upload: %{file: upload}})
+        |> get_flash(:error)
 
       assert flash_message == "Some error occurred while processing the file"
     end

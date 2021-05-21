@@ -6,14 +6,13 @@ defmodule GoogleCrawlerWeb.UploadFileTest do
   }
 
   feature "upload a file", %{session: session} do
-    login_with_user(session)
+    session
+    |> login_with_user()
     |> visit(Routes.upload_path(GoogleCrawlerWeb.Endpoint, :new))
     |> attach_file(Query.file_field(@selectors.file_field),
       path: "test/support/fixtures/csv/valid.csv"
     )
     |> click(Query.button("Upload"))
-
-    session
     |> assert_has(Query.text("File processed successfully"))
   end
 end
