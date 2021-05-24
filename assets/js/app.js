@@ -13,6 +13,7 @@ import "../css/app.scss"
 //     import socket from "./socket"
 //
 // CoreJS
+import "../vendor/js/bootstrap"
 import "core-js/stable"
 import "regenerator-runtime/runtime"
 

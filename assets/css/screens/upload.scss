@@ -3,6 +3,15 @@
     border: 2px solid black;
     text-align: center;
     display: inline-block;
-    padding: 2rem;
+    padding-top: 1rem;
+
+    .upload-button {
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    form {
+      padding: 0rem 2rem 0rem;
+    }
   }
 }
