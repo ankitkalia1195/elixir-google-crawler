@@ -5,7 +5,7 @@ defmodule GoogleCrawlerWeb.UploadFileTest do
     file_field: "upload[file]"
   }
 
-  feature "upload a file", %{session: session} do
+  feature "uploads a file", %{session: session} do
     session
     |> login_with_user()
     |> visit(Routes.upload_path(GoogleCrawlerWeb.Endpoint, :new))

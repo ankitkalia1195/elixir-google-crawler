@@ -9,7 +9,7 @@ defmodule GoogleCrawlerWeb.UploadController do
 
   def create(conn, %{"upload" => upload}) do
     case Upload.process(conn.assigns[:current_user], upload["file"]) do
-      {:ok, _changeset} ->
+      {:ok, _transaction_result} ->
         conn
         |> put_flash(:info, "File processed successfully")
         |> redirect(to: Routes.upload_path(conn, :new))

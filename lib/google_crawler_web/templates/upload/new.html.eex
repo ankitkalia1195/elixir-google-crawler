@@ -2,7 +2,6 @@
   <h3>Upload a new file!</h3>
   <%= form_for @conn, "/uploads", [as: :upload, multipart: true], fn f -> %>
     <div class="form-group">
-      <label></label>
       <%= file_input f, :file, class: "form-control", accept: ".csv" %>
     </div>
 

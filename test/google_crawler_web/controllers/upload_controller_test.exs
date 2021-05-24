@@ -25,15 +25,14 @@ defmodule GoogleCrawlerWeb.UploadControllerTest do
       assert Repo.aggregate(Keyword, :count) == 2
     end
 
-    test "sets flash message when file is succesfully processed", %{conn: conn} do
+    test "sets flash message and redirects when file is succesfully processed", %{conn: conn} do
       upload = %Plug.Upload{path: "test/support/fixtures/csv/valid.csv", filename: "upload.csv"}
 
-      flash_message =
-        conn
-        |> post(Routes.upload_path(conn, :create), %{upload: %{file: upload}})
-        |> get_flash(:info)
+      result_conn = post(conn, Routes.upload_path(conn, :create), %{upload: %{file: upload}})
 
-      assert flash_message == "File processed successfully"
+      assert result_conn.status == 302
+      assert redirected_to(result_conn) == Routes.upload_path(conn, :new)
+      assert get_flash(result_conn, :info) == "File processed successfully"
     end
 
     test "does NOT create keywords when file is NOT succesfully processed", %{conn: conn} do
@@ -47,15 +46,14 @@ defmodule GoogleCrawlerWeb.UploadControllerTest do
       assert Repo.aggregate(Keyword, :count) == 0
     end
 
-    test "sets flash message when file is NOT succesfully processed", %{conn: conn} do
+    test "sets flash message and redirects when file is NOT succesfully processed", %{conn: conn} do
       upload = %Plug.Upload{path: "test/support/fixtures/csv/invalid.csv", filename: "upload.csv"}
 
-      flash_message =
-        conn
-        |> post(Routes.upload_path(conn, :create), %{upload: %{file: upload}})
-        |> get_flash(:error)
+      result_conn = post(conn, Routes.upload_path(conn, :create), %{upload: %{file: upload}})
 
-      assert flash_message == "Some error occurred while processing the file"
+      assert result_conn.status == 302
+      assert redirected_to(result_conn) == Routes.upload_path(conn, :new)
+      assert get_flash(result_conn, :error) == "Some error occurred while processing the file"
     end
   end
 end
