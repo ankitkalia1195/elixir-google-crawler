@@ -13,13 +13,13 @@
     </thead>
     <tbody>
   <%= for keyword <- @keywords do %>
-      <tr>
-        <td><%= keyword.name %></td>
-        <td><%= keyword.status %></td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
+    <tr>
+      <td><%= keyword.name %></td>
+      <td><%= keyword.status %></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
   <% end %>
     </tbody>
   </table>

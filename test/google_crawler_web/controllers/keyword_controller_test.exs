@@ -1,19 +1,19 @@
 defmodule GoogleCrawlerWeb.KeywordControllerTest do
   use GoogleCrawlerWeb.ConnCase
 
-  alias GoogleCrawler.Repo
+  alias GoogleCrawler.Search.Keyword
 
   describe "index" do
-    test "assings keywords and returns 200 response", %{conn: conn} do
+    test "assigns keywords and returns 200 response", %{conn: conn} do
       user = insert(:user)
-      keyword = insert(:keyword, name: "travel", status: :pending, user: user)
+      %{id: keyword_id} = insert(:keyword, name: "travel", status: :pending, user: user)
 
       result_conn =
         conn
         |> log_in_user(user)
         |> get(Routes.keyword_path(conn, :index))
 
-      assert Repo.preload(result_conn.assigns[:keywords], :user) == [keyword]
+      assert [%Keyword{id: ^keyword_id}] = result_conn.assigns[:keywords]
       assert html_response(result_conn, 200) =~ "Listing Keywords"
     end
   end
