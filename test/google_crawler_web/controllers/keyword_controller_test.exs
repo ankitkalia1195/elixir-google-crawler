@@ -1,9 +1,9 @@
 defmodule GoogleCrawlerWeb.KeywordControllerTest do
-  use GoogleCrawlerWeb.ConnCase
+  use GoogleCrawlerWeb.ConnCase, async: true
 
   alias GoogleCrawler.Search.Keyword
 
-  describe "index" do
+  describe "GET index/2" do
     test "assigns keywords and returns 200 response", %{conn: conn} do
       user = insert(:user)
       %{id: keyword_id} = insert(:keyword, name: "travel", status: :pending, user: user)

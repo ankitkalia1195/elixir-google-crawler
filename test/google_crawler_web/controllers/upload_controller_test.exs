@@ -5,7 +5,7 @@ defmodule GoogleCrawlerWeb.UploadControllerTest do
 
   setup :register_and_log_in_user
 
-  describe "GET #new" do
+  describe "GET new/2" do
     test "renders the new page", %{conn: conn} do
       response =
         conn
@@ -16,7 +16,7 @@ defmodule GoogleCrawlerWeb.UploadControllerTest do
     end
   end
 
-  describe "POST #create" do
+  describe "POST create/2" do
     test "creates the keywords when file is succesfully processed", %{conn: conn} do
       upload = %Plug.Upload{path: "test/support/fixtures/csv/valid.csv", filename: "upload.csv"}
 
