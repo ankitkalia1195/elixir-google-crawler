@@ -14,5 +14,8 @@ defmodule GoogleCrawlerWeb.UploadFileTest do
     )
     |> click(Query.button("Upload"))
     |> assert_has(Query.text("File processed successfully"))
+    |> assert_has(css(".table"))
+    |> assert_has(Query.text("travel"))
+    |> assert_has(Query.text("thailand"))
   end
 end

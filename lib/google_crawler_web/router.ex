@@ -29,6 +29,7 @@ defmodule GoogleCrawlerWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     resources "/uploads", UploadController, only: [:new, :create]
+    resources "/keywords", KeywordController, only: [:index]
   end
 
   # Other scopes may use custom stacks.

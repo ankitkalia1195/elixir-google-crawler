@@ -1,5 +1,5 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Google Crawler" %></h1>
+  <h1><%= gettext "Welcome to %{name}!", name: "Google Crawler" %> Please <%= link "upload", to: Routes.upload_path(@conn, :new) %> a csv to begin. </h1>
   <%= unless @current_user do %>
     <p>Please login or register to continue</p>
   <% end %>

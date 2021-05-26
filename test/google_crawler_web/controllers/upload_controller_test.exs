@@ -31,7 +31,7 @@ defmodule GoogleCrawlerWeb.UploadControllerTest do
       result_conn = post(conn, Routes.upload_path(conn, :create), %{upload: %{file: upload}})
 
       assert result_conn.status == 302
-      assert redirected_to(result_conn) == Routes.upload_path(conn, :new)
+      assert redirected_to(result_conn) == Routes.keyword_path(conn, :index)
       assert get_flash(result_conn, :info) == "File processed successfully"
     end
 

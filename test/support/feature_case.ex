@@ -4,6 +4,7 @@ defmodule GoogleCrawlerWeb.FeatureCase do
   using do
     quote do
       use Wallaby.Feature
+      import Wallaby.Query
 
       import GoogleCrawler.Factory
 

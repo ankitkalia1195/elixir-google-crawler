@@ -12,7 +12,7 @@ defmodule GoogleCrawlerWeb.UploadController do
       {:ok, _transaction_result} ->
         conn
         |> put_flash(:info, "File processed successfully")
-        |> redirect(to: Routes.upload_path(conn, :new))
+        |> redirect(to: Routes.keyword_path(conn, :index))
 
       _ ->
         conn
