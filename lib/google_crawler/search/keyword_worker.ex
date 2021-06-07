@@ -1,5 +1,4 @@
 defmodule GoogleCrawler.Search.KeywordWorker do
-  # credo:disable-for-this-file Credo.Check.Consistency.MultiAliasImportRequireUse
   use Oban.Worker,
     priority: 1,
     max_attempts: 10,

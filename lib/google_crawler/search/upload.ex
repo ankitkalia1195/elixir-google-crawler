@@ -1,5 +1,4 @@
 defmodule GoogleCrawler.Search.Upload do
-  # credo:disable-for-this-file Credo.Check.Consistency.MultiAliasImportRequireUse
   alias Ecto.Multi
   alias GoogleCrawler.Accounts.User
   alias GoogleCrawler.Repo
