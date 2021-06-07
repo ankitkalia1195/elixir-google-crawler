@@ -13,6 +13,7 @@ defmodule GoogleCrawler.Search.Parser do
   def parse(doc) do
     {:ok, document} = Floki.parse_document(doc)
 
+    # TODO: Fix the html code parsing issue, as it results in a error while storing in database
     %Result{
       html_code: "",
       links_count: total_links_count(document),
