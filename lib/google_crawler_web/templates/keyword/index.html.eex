@@ -6,9 +6,9 @@
       <tr>
         <th>Name</th>
         <th>Status</th>
-        <th># Search Results</th>
+        <th># Links Count</th>
         <th># Top-Adwords</th>
-        <th># Bottom-Adwords</th>
+        <th># Non-Ad Results</th>
       </tr>
     </thead>
     <tbody>
@@ -16,9 +16,15 @@
     <tr>
       <td><%= keyword.name %></td>
       <td><%= keyword.status %></td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <%= if keyword.result do %>
+        <td><%= keyword.result.links_count %></td>
+        <td><%= keyword.result.top_ads |> Enum.count() %></td>
+        <td><%= keyword.result.non_ads |> Enum.count() %></td>
+      <% else %>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+      <% end %>
     </tr>
   <% end %>
     </tbody>

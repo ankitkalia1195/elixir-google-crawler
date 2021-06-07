@@ -64,7 +64,9 @@ defmodule GoogleCrawler.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:nimble_template, "~> 3.0", only: :dev, runtime: false},
-      {:phx_gen_auth, "~> 0.7", only: :dev, runtime: false}
+      {:phx_gen_auth, "~> 0.7", only: :dev, runtime: false},
+      {:httpoison, "~> 1.8"},
+      {:floki, "~> 0.30.1"}
     ]
   end
 

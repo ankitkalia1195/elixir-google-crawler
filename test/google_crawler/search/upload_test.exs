@@ -12,8 +12,10 @@ defmodule GoogleCrawler.Search.UploadTest do
 
       assert {:ok,
               %{
-                {:keyword, " thailand"} => %Keyword{},
-                {:keyword, "travel"} => %Keyword{}
+                "enqueue_search_ thailand" => %Oban.Job{},
+                "enqueue_search_travel" => %Oban.Job{},
+                "keyword_ thailand" => %Keyword{},
+                "keyword_travel" => %Keyword{}
               }} = result
 
       [first_keyword, second_keyword] = Repo.all(Keyword)
@@ -27,7 +29,7 @@ defmodule GoogleCrawler.Search.UploadTest do
 
       result = GoogleCrawler.Search.Upload.process(user, upload)
 
-      assert {:error, {:keyword, ""}, _changeset, %{}} = result
+      assert {:error, "keyword_", _changeset, %{}} = result
 
       assert Repo.aggregate(Keyword, :count) == 0
     end
