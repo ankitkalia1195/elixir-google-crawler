@@ -12,16 +12,14 @@ defmodule GoogleCrawler.Search.KeywordWorker do
   def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}}) do
     keyword = Repo.get_by!(Keyword, %{id: keyword_id})
 
-    keyword
-    |> Ecto.Changeset.change(status: :in_progress)
-    |> Repo.update!()
+    updated_keyword =
+      keyword
+      |> Ecto.Changeset.change(status: :in_progress)
+      |> Repo.update!()
+      |> Ecto.Changeset.change(result: parsed_result(keyword), status: :finished)
+      |> Repo.update!()
 
-    keyword
-    |> Repo.reload()
-    |> Ecto.Changeset.change(result: parsed_result(keyword), status: :finished)
-    |> Repo.update!()
-
-    {:ok, Repo.reload(keyword)}
+    {:ok, updated_keyword}
   end
 
   defp parsed_result(keyword) do

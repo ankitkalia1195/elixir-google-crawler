@@ -2,7 +2,7 @@ defmodule GoogleCrawler.Search.KeywordWorkerTest do
   use GoogleCrawler.DataCase, async: true
   alias GoogleCrawler.Search.KeywordWorker
 
-  describe "perform" do
+  describe "perform/1" do
     test "creates the results" do
       use_cassette "search/keyword_travel" do
         user = insert(:user)

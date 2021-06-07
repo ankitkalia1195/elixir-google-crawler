@@ -1,7 +1,6 @@
 defmodule GoogleCrawler.Search.ParserTest do
   use GoogleCrawler.DataCase, async: true
-  alias GoogleCrawler.Search.Parser
-  alias GoogleCrawler.Search.Result
+  alias GoogleCrawler.Search.{Parser, Result}
 
   describe "parse/1" do
     test "parses the html response" do
