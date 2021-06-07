@@ -1,3 +1,4 @@
+# credo:disable-for-this-file Credo.Check.Design.TagTODO
 defmodule GoogleCrawler.Search.Parser do
   alias GoogleCrawler.Search.Result
 
