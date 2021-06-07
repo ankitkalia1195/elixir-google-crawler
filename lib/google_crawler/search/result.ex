@@ -11,11 +11,4 @@ defmodule GoogleCrawler.Search.Result do
 
     timestamps()
   end
-
-  # @doc false
-  # def changeset(result, attrs) do
-  #   result
-  #   |> cast(attrs, [:top_ads, :all_ads, :non_ads, :links_count, :html_code, :keyword])
-  #   |> validate_required([:top_ads, :all_ads, :non_ads, :links_count, :html_code, :keyword])
-  # end
 end

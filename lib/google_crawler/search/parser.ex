@@ -1,6 +1,7 @@
 defmodule GoogleCrawler.Search.Parser do
   alias GoogleCrawler.Search.Result
 
+  # TODO: Fix the selectors for gettings ad results, currently they are not correct.
   @selectors %{
     total_links: "a[href]",
     total_ads: ".ads-ad",

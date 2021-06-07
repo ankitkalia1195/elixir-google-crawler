@@ -9,7 +9,7 @@ defmodule GoogleCrawler.Search.KeywordWorker do
   alias GoogleCrawler.Search.{Keyword, Parser}
 
   @impl Worker
-  def perform(%Oban.Job{args: %{"keyword_id" => keyword_id} = args}) do
+  def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}}) do
     keyword = Repo.get_by!(Keyword, %{id: keyword_id})
 
     keyword
