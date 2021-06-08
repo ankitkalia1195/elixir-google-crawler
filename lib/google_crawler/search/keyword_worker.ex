@@ -15,7 +15,8 @@ defmodule GoogleCrawler.Search.KeywordWorker do
       keyword
       |> Ecto.Changeset.change(status: :in_progress)
       |> Repo.update!()
-      |> Ecto.Changeset.change(result: parsed_result!(keyword), status: :finished)
+      |> Ecto.Changeset.change(status: :finished)
+      |> Ecto.Changeset.put_embed(:result, parsed_result!(keyword))
       |> Repo.update!()
 
     {:ok, updated_keyword}
