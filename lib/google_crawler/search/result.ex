@@ -1,6 +1,5 @@
 defmodule GoogleCrawler.Search.Result do
   use Ecto.Schema
-  # import Ecto.Changeset
 
   embedded_schema do
     field :all_ads, {:array, :string}

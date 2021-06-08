@@ -15,13 +15,13 @@ defmodule GoogleCrawler.Search.KeywordWorker do
       keyword
       |> Ecto.Changeset.change(status: :in_progress)
       |> Repo.update!()
-      |> Ecto.Changeset.change(result: parsed_result(keyword), status: :finished)
+      |> Ecto.Changeset.change(result: parsed_result!(keyword), status: :finished)
       |> Repo.update!()
 
     {:ok, updated_keyword}
   end
 
-  defp parsed_result(keyword) do
+  defp parsed_result!(keyword) do
     response = HTTPoison.get!("https://www.google.com/search?q=#{keyword.name}")
     Parser.parse(response.body)
   end
