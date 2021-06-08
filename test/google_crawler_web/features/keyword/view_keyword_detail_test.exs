@@ -4,6 +4,7 @@ defmodule GoogleCrawlerWeb.Upload.ViewKeywordDetailPageTest do
 
   feature "views keyword detail page when keyword is processed", %{session: session} do
     user = insert(:user)
+
     result = %Result{
       links_count: 20,
       all_ads: [],
@@ -12,7 +13,7 @@ defmodule GoogleCrawlerWeb.Upload.ViewKeywordDetailPageTest do
       html_code: ""
     }
 
-    %{id: keyword_id}  = insert(:keyword, name: "travel", user: user, result: result)
+    %{id: keyword_id} = insert(:keyword, name: "travel", user: user, result: result)
 
     session
     |> login(user.email, "hello world!")
