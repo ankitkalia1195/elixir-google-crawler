@@ -1,7 +1,7 @@
 <h1>Listing Keywords</h1>
 
 <%= unless Enum.empty?(@keywords) do %>
-  <table class="keyword table">
+  <table class="keyword-index table">
     <thead>
       <tr>
         <th>Name</th>
@@ -14,7 +14,7 @@
     <tbody>
   <%= for keyword <- @keywords do %>
     <tr>
-      <td><%= keyword.name %></td>
+      <td><%= link keyword.name, to: Routes.keyword_path(@conn, :show, keyword.id) %></td>
       <td><%= keyword.status %></td>
       <%= if keyword.result do %>
         <td><%= keyword.result.links_count %></td>

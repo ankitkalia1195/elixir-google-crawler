@@ -1,0 +1,32 @@
+<h5><%= link "Keywords", to: Routes.keyword_path(@conn, :index) %> / <b><%= @keyword.name %></b></h5>
+
+<%= if @keyword.result do %>
+  <table class = 'keyword-show table table-bordered'>
+    <tr>
+      <td> Links Count </td>
+      <td> <%= @keyword.result.links_count %> </td>
+    </tr>
+    <tr>
+      <td> Top Ads </td>
+      <td> <%= @keyword.result.non_ads |> Enum.count() %> </td>
+    </tr>
+    <tr>
+      <td> Total Ads </td>
+      <td> <%= @keyword.result.all_ads |> Enum.count() %> </td>
+    </tr>
+
+    <tr>
+      <td> Non Ad Urls </td>
+      <td>
+        <ul>
+          <%= for url <- @keyword.result.non_ads do %>
+            <li><%= link url, to: url %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td> <%= @keyword.result.non_ads |> Enum.join(",") %> </td>
+    </tr>
+  </table>
+<% else %>
+  <p> Keyword processing is not yet finished </p>
+<% end %>
