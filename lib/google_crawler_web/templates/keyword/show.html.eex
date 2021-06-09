@@ -1,7 +1,7 @@
 <h5><%= link "Keywords", to: Routes.keyword_path(@conn, :index) %> / <b><%= @keyword.name %></b></h5>
 
 <%= if @keyword.result do %>
-  <table class = 'keyword-show table table-bordered'>
+  <table class = "table table-bordered">
     <tr>
       <td> Links Count </td>
       <td> <%= @keyword.result.links_count %> </td>
