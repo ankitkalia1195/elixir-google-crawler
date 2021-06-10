@@ -1,25 +1,25 @@
 <h1>Listing Keywords</h1>
 
 <%= unless Enum.empty?(@keywords) do %>
-  <table class="keyword table">
+  <table class="table">
     <thead>
       <tr>
         <th>Name</th>
         <th>Status</th>
         <th># Links Count</th>
         <th># Top-Adwords</th>
-        <th># Non-Ad Results</th>
+        <th># Non-Ad</th>
       </tr>
     </thead>
     <tbody>
   <%= for keyword <- @keywords do %>
     <tr>
-      <td><%= keyword.name %></td>
+      <td><%= link keyword.name, to: Routes.keyword_path(@conn, :show, keyword.id) %></td>
       <td><%= keyword.status %></td>
       <%= if keyword.result do %>
-        <td><%= keyword.result.links_count %></td>
-        <td><%= keyword.result.top_ads |> Enum.count() %></td>
-        <td><%= keyword.result.non_ads |> Enum.count() %></td>
+        <td class="count"><%= keyword.result.links_count %></td>
+        <td class="count"><%= keyword.result.top_ads |> Enum.count() %></td>
+        <td class="count"><%= keyword.result.non_ads |> Enum.count() %></td>
       <% else %>
         <td> </td>
         <td> </td>
