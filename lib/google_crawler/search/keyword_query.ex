@@ -11,7 +11,7 @@ defmodule GoogleCrawler.Search.KeywordQuery do
     |> order_by(desc: :inserted_at)
   end
 
-  defp filter_by_term(query, %KeywordQueryParams{term: term}) when term != "" do
+  defp filter_by_term(query, %KeywordQueryParams{term: term}) when term != "" and term != nil do
     query_term = "%#{term}%"
     where(query, [k], like(k.name, ^query_term))
   end
