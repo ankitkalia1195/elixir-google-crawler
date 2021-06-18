@@ -1,34 +1,59 @@
-<h1>Listing Keywords</h1>
+  <div class="row">
+    <div class="filter-form col-3">
+      <%= form_for @query_params_changeset, Routes.keyword_path(@conn, :index),[method: :get, as: "filter"], fn f -> %>
+        <div class="form-group">
+          <%= label :term, "Search Term" %>
+          <%= search_input f, :term, [id: "filter_term"] %>
+        </div>
 
-<%= unless Enum.empty?(@keywords) do %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-        <th># Links Count</th>
-        <th># Top-Adwords</th>
-        <th># Non-Ad</th>
-      </tr>
-    </thead>
-    <tbody>
-  <%= for keyword <- @keywords do %>
-    <tr>
-      <td><%= link keyword.name, to: Routes.keyword_path(@conn, :show, keyword.id) %></td>
-      <td><%= keyword.status %></td>
-      <%= if keyword.result do %>
-        <td class="count"><%= keyword.result.links_count %></td>
-        <td class="count"><%= keyword.result.top_ads |> Enum.count() %></td>
-        <td class="count"><%= keyword.result.non_ads |> Enum.count() %></td>
-      <% else %>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+        <div class="form-group">
+          <%= label :min_links_count, "Links Count(Min)" %>
+          <%= number_input f, :min_links_count %>
+        </div>
+
+        <div class="form-group">
+          <%= label :max_links_count, "Links Count(Max)" %>
+          <%= number_input f, :max_links_count %>
+        </div>
+
+        <%= submit "Filter" %>
       <% end %>
-    </tr>
-  <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p> No keywords present yet. Please <%= link "upload", to: Routes.upload_path(@conn, :new) %> a csv to begin.</p>
-<% end %>
+    </div>
+
+    <div class="col-9">
+      <%= unless Enum.empty?(@keywords) do %>
+        <h3> Keywords Listing </h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Links Count</th>
+              <th>Top-Ads</th>
+              <th>Non-Ads</th>
+            </tr>
+          </thead>
+          <tbody>
+        <%= for keyword <- @keywords do %>
+          <tr>
+            <td><%= link keyword.name, to: Routes.keyword_path(@conn, :show, keyword.id) %></td>
+            <td><%= keyword.status %></td>
+            <%= if keyword.result do %>
+              <td class="count"><%= keyword.result.links_count %></td>
+              <td class="count"><%= Enum.count(keyword.result.top_ads) %></td>
+              <td class="count"><%= Enum.count(keyword.result.non_ads) %></td>
+            <% else %>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+            <% end %>
+          </tr>
+        <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p> No keywords present or no results match the given criteria. Please <%= link "upload", to: Routes.upload_path(@conn, :new) %> a csv for creating keywords.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
