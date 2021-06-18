@@ -6,7 +6,8 @@ defmodule GoogleCrawlerWeb.KeywordController do
   alias GoogleCrawler.Search.{Keyword, KeywordQuery, KeywordQueryParams}
 
   def index(conn, params) do
-    %{ query_params: query_params, changeset: changeset } = KeywordQueryParams.new(params["filter"] || %{})
+    %{query_params: query_params, changeset: changeset} =
+      KeywordQueryParams.new(params["filter"] || %{})
 
     keywords = Search.list_keywords(conn.assigns[:current_user], query_params)
     render(conn, "index.html", keywords: keywords, query_params_changeset: changeset)

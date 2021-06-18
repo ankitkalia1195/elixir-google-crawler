@@ -9,13 +9,12 @@ defmodule GoogleCrawler.Search.KeywordQueryParams do
   end
 
   def new(params) do
-    changeset = %__MODULE__{}
-              |> changeset(params)
+    params_changeset = changeset(%__MODULE__{}, params)
 
-    %{query_params: Ecto.Changeset.apply_changes(changeset), changeset: changeset }
+    %{query_params: Ecto.Changeset.apply_changes(params_changeset), changeset: params_changeset}
   end
 
-  def changeset(keyword_query_params  \\ %__MODULE__{}, attrs) do
+  def changeset(keyword_query_params \\ %__MODULE__{}, attrs) do
     cast(keyword_query_params, attrs, [:term, :min_links_count, :max_links_count])
   end
 end
