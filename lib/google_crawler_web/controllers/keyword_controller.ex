@@ -3,7 +3,7 @@ defmodule GoogleCrawlerWeb.KeywordController do
 
   alias GoogleCrawler.Repo
   alias GoogleCrawler.Search
-  alias GoogleCrawler.Search.{Keyword, KeywordQuery, KeywordQueryParams}
+  alias GoogleCrawler.Search.{Keyword, KeywordQueryParams}
 
   def index(conn, params) do
     %{query_params: query_params, changeset: changeset} =
