@@ -8,7 +8,7 @@
     </tr>
     <tr>
       <td> Top Ads </td>
-      <td> <%= @keyword.result.non_ads |> Enum.count() %> </td>
+      <td> <%= @keyword.result.top_ads |> Enum.count() %> </td>
     </tr>
     <tr>
       <td> Total Ads </td>

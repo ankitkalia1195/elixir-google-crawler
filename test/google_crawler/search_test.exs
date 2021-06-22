@@ -3,7 +3,7 @@ defmodule GoogleCrawler.SearchTest do
   alias GoogleCrawler.Search
   alias GoogleCrawler.Search.Keyword
 
-  describe "list_keywords/1" do
+  describe "list_keywords/2" do
     test "lists the keywords for given user" do
       user = insert(:user)
       another_user = insert(:user)

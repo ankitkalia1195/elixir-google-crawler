@@ -2,13 +2,12 @@ defmodule GoogleCrawler.Search do
   @moduledoc """
   The Search context.
   """
-  import Ecto.Query, only: [from: 2]
 
   alias GoogleCrawler.Repo
+  alias GoogleCrawler.Search.{KeywordQuery, KeywordQueryParams}
 
-  def list_keywords(user) do
-    query = from(k in GoogleCrawler.Search.Keyword, where: k.user_id == ^user.id)
-
+  def list_keywords(user, query_params \\ %KeywordQueryParams{}) do
+    query = KeywordQuery.build(user, query_params)
     Repo.all(query)
   end
 end
