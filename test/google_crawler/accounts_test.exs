@@ -518,7 +518,8 @@ defmodule GoogleCrawler.AccountsTest do
     test "return error when user credentials are INVALID" do
       insert(:user, email: "test@example.com", password: "valid_password")
 
-      assert Accounts.authenticate_and_generate_api_token("test@example.com", "invalid_password") == :error
+      assert Accounts.authenticate_and_generate_api_token("test@example.com", "invalid_password") ==
+               :error
     end
   end
 end

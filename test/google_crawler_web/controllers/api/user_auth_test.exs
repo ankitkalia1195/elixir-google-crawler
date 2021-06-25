@@ -8,7 +8,8 @@ defmodule GoogleCrawlerWeb.Api.UserAuthTest do
       user = insert(:user)
       token = insert(:user_token, context: "api", user: user)
 
-      result_conn = conn
+      result_conn =
+        conn
         |> put_req_header("x-token", Base.encode64(token.token))
         |> UserAuth.authenticate_user_by_token([])
 
@@ -16,7 +17,8 @@ defmodule GoogleCrawlerWeb.Api.UserAuthTest do
     end
 
     test "halts the connection when INVALID token is given", %{conn: conn} do
-      halted_conn = conn
+      halted_conn =
+        conn
         |> put_req_header("x-token", "invalid_token")
         |> UserAuth.authenticate_user_by_token([])
 

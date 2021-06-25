@@ -6,7 +6,7 @@ defmodule GoogleCrawlerWeb.Api.UserAuth do
   alias GoogleCrawler.Repo
 
   def authenticate_user_by_token(conn, _opts) do
-    header_token =  conn |> get_req_header("x-token") |> List.first
+    header_token = conn |> get_req_header("x-token") |> List.first()
 
     case fetch_user_token(header_token) do
       %UserToken{} = user_token ->
@@ -27,6 +27,7 @@ defmodule GoogleCrawlerWeb.Api.UserAuth do
         UserToken
         |> Repo.get_by(%{context: "api", token: decoded_token})
         |> Repo.preload(:user)
+
       _ ->
         :error
     end
