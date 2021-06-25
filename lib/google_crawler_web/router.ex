@@ -2,6 +2,7 @@ defmodule GoogleCrawlerWeb.Router do
   use GoogleCrawlerWeb, :router
 
   import GoogleCrawlerWeb.UserAuth
+  import GoogleCrawlerWeb.Api.UserAuth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,7 +15,8 @@ defmodule GoogleCrawlerWeb.Router do
 
   # coveralls-ignore-start
   pipeline :api do
-    plug :accepts, ["json"]
+    plug JSONAPI.EnsureSpec
+    plug JSONAPI.UnderscoreParameters
   end
 
   # coveralls-ignore-stop
@@ -32,10 +34,11 @@ defmodule GoogleCrawlerWeb.Router do
     resources "/keywords", KeywordController, only: [:index, :show]
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", GoogleCrawlerWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", GoogleCrawlerWeb do
+    pipe_through :api
+
+    resources "/tokens", Api.TokenController, only: [:create]
+  end
 
   # Enables LiveDashboard only for development
   #

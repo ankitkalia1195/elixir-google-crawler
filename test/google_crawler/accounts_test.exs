@@ -506,4 +506,19 @@ defmodule GoogleCrawler.AccountsTest do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
+
+  describe "authenticate_and_generate_token/2" do
+    test "return token when user credentials are VALID" do
+      insert(:user, email: "test@example.com", password: "valid_password")
+
+      assert {:ok, %UserToken{}} =
+               Accounts.authenticate_and_generate_api_token("test@example.com", "valid_password")
+    end
+
+    test "return error when user credentials are INVALID" do
+      insert(:user, email: "test@example.com", password: "valid_password")
+
+      assert Accounts.authenticate_and_generate_api_token("test@example.com", "invalid_password") == :error
+    end
+  end
 end

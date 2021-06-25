@@ -349,4 +349,15 @@ defmodule GoogleCrawler.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  def authenticate_and_generate_api_token(email, password) do
+    case get_user_by_email_and_password(email, password) do
+      %User{} = user ->
+        {token, user_token} = UserToken.build_api_token(user)
+        {:ok, Repo.insert!(user_token)}
+
+      _ ->
+        :error
+    end
+  end
 end
