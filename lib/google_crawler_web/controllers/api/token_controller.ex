@@ -2,7 +2,6 @@ defmodule GoogleCrawlerWeb.Api.TokenController do
   use GoogleCrawlerWeb, :controller
 
   alias GoogleCrawler.Accounts
-  alias GoogleCrawler.Repo
 
   def create(conn, %{"data" => %{"attributes" => %{"email" => email, "password" => password}}}) do
     case Accounts.authenticate_and_generate_api_token(email, password) do

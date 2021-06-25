@@ -2,7 +2,6 @@ defmodule GoogleCrawlerWeb.Router do
   use GoogleCrawlerWeb, :router
 
   import GoogleCrawlerWeb.UserAuth
-  import GoogleCrawlerWeb.Api.UserAuth
 
   pipeline :browser do
     plug :accepts, ["html"]
