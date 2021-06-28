@@ -1,5 +1,5 @@
 defmodule GoogleCrawlerWeb.Api.PageControllerTest do
-  use GoogleCrawlerWeb.ConnCase
+  use GoogleCrawlerWeb.ConnCase, async: true
 
   describe "POST create/2" do
     test "returns the token when VALID credentials are given", %{conn: conn} do
