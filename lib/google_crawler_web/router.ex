@@ -43,7 +43,7 @@ defmodule GoogleCrawlerWeb.Router do
   scope "/api", GoogleCrawlerWeb, as: :api do
     pipe_through [:api, :authenticate_user_by_token]
 
-    resources "/keywords", Api.KeywordController, only: [:show]
+    resources "/keywords", Api.KeywordController, only: [:show, :index]
   end
 
   # Enables LiveDashboard only for development
