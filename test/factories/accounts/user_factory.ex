@@ -5,14 +5,13 @@ defmodule GoogleCrawler.Accounts.UserFactory do
       defp user_password, do: "hello world!"
 
       def user_factory(attrs) do
+        password = attrs[:password] || user_password()
+        attrs = Map.delete(attrs, :password)
+
         user = %GoogleCrawler.Accounts.User{
           email: attrs[:email] || user_email(),
-          hashed_password: Bcrypt.hash_pwd_salt(attrs[:password] || user_password())
+          hashed_password: Bcrypt.hash_pwd_salt(password)
         }
-
-        user
-        |> merge_attributes(Map.delete(attrs, :password))
-        |> evaluate_lazy_attributes()
       end
     end
   end
