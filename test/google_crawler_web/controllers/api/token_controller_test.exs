@@ -9,7 +9,7 @@ defmodule GoogleCrawlerWeb.Api.PageControllerTest do
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
         |> put_req_header("accept", "application/vnd.api+json")
-        |> post(Routes.token_path(conn, :create), %{
+        |> post(Routes.api_token_path(conn, :create), %{
           "data" => %{
             "attributes" => %{"email" => "test@example.com", password: "valid_password"},
             "type" => "credentials"
@@ -36,7 +36,7 @@ defmodule GoogleCrawlerWeb.Api.PageControllerTest do
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
         |> put_req_header("accept", "application/vnd.api+json")
-        |> post(Routes.token_path(conn, :create), %{
+        |> post(Routes.api_token_path(conn, :create), %{
           "data" => %{
             "attributes" => %{"email" => "test@example.com", password: "invalid_password"},
             "type" => "credentials"

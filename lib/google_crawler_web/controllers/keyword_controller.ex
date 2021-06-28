@@ -14,7 +14,16 @@ defmodule GoogleCrawlerWeb.KeywordController do
   end
 
   def show(conn, %{"id" => id}) do
-    keyword = Repo.get_by(Keyword, %{id: id})
-    render(conn, "show.html", keyword: keyword)
+    keyword = Repo.get_by(Keyword, %{id: id, user_id: conn.assigns[:current_user].id})
+
+    case keyword do
+      %Keyword{} = keyword ->
+        render(conn, "show.html", keyword: keyword)
+
+      _ ->
+        conn
+        |> put_flash(:error, "Keyword not found")
+        |> redirect(to: Routes.keyword_path(conn, :index))
+    end
   end
 end
