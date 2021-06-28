@@ -18,7 +18,7 @@ defmodule GoogleCrawlerWeb.Api.PageControllerTest do
 
       assert %{
                "data" => %{
-                 "attributes" => %{"access_token" => _, "id" => _},
+                 "attributes" => %{"access_token" => _},
                  "id" => _,
                  "links" => %{"self" => _},
                  "relationships" => %{},
