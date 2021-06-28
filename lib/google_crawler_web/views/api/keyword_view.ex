@@ -3,7 +3,7 @@ defmodule GoogleCrawlerWeb.Api.KeywordView do
   alias GoogleCrawler.Search.Result
 
   def fields do
-    [:id, :name, :result]
+    [:name, :result]
   end
 
   def result(keyword, _conn) do
