@@ -31,6 +31,15 @@ config :google_crawler, Oban,
   plugins: [Oban.Plugins.Pruner],
   queues: [default: 10]
 
+config :jsonapi,
+  host: System.get_env("HOST") || "localhost:4000",
+  scheme: "http",
+  namespace: "/api",
+  field_transformation: :underscore,
+  remove_links: false,
+  json_library: Jason,
+  paginator: nil
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

@@ -22,13 +22,24 @@ defmodule GoogleCrawler.Accounts.UserToken do
   end
 
   @doc """
+  Generates a token that will be used for api authentication purpose.
+  """
+  def build_api_token(user) do
+    build_token(user, "api")
+  end
+
+  @doc """
   Generates a token that will be stored in a signed place,
   such as session or cookie. As they are signed, those
   tokens do not need to be hashed.
   """
   def build_session_token(user) do
+    build_token(user, "session")
+  end
+
+  defp build_token(user, context) do
     token = :crypto.strong_rand_bytes(@rand_size)
-    {token, %GoogleCrawler.Accounts.UserToken{token: token, context: "session", user_id: user.id}}
+    {token, %GoogleCrawler.Accounts.UserToken{token: token, context: context, user_id: user.id}}
   end
 
   @doc """
