@@ -71,18 +71,16 @@ defmodule GoogleCrawlerWeb.KeywordControllerTest do
       assert html_response(result_conn, 200) =~ "travel"
     end
 
-    test "redirects to index when keyword is not found", %{conn: conn} do
+    test "renders 404 page when keyword is not found", %{conn: conn} do
       user = insert(:user)
       another_user = insert(:user)
       %{id: keyword_id} = insert(:keyword, name: "travel", status: :pending, user: another_user)
 
-      result_conn =
+      assert_error_sent 404, fn ->
         conn
         |> log_in_user(user)
         |> get(Routes.keyword_path(conn, :show, keyword_id))
-
-      assert redirected_to(result_conn) == Routes.keyword_path(conn, :index)
-      assert get_flash(result_conn, :error) == "Keyword not found"
+      end
     end
   end
 end
