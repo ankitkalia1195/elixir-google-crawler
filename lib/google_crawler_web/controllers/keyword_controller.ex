@@ -1,8 +1,7 @@
 defmodule GoogleCrawlerWeb.KeywordController do
   use GoogleCrawlerWeb, :controller
 
-  alias GoogleCrawler.Repo
-  alias GoogleCrawler.Search
+  alias GoogleCrawler.{Repo, Search}
   alias GoogleCrawler.Search.{Keyword, KeywordQueryParams}
 
   def index(conn, params) do
