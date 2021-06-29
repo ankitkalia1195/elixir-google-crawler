@@ -2,6 +2,7 @@ defmodule GoogleCrawlerWeb.Router do
   use GoogleCrawlerWeb, :router
 
   import GoogleCrawlerWeb.UserAuth
+  import GoogleCrawlerWeb.Api.UserAuth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -33,10 +34,16 @@ defmodule GoogleCrawlerWeb.Router do
     resources "/keywords", KeywordController, only: [:index, :show]
   end
 
-  scope "/api", GoogleCrawlerWeb do
+  scope "/api", GoogleCrawlerWeb, as: :api do
     pipe_through :api
 
     resources "/tokens", Api.TokenController, only: [:create]
+  end
+
+  scope "/api", GoogleCrawlerWeb, as: :api do
+    pipe_through [:api, :authenticate_user_by_token]
+
+    resources "/keywords", Api.KeywordController, only: [:show, :index]
   end
 
   # Enables LiveDashboard only for development
