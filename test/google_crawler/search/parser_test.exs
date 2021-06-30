@@ -1,33 +1,36 @@
 defmodule GoogleCrawler.Search.ParserTest do
   use GoogleCrawler.DataCase, async: true
-  alias GoogleCrawler.Search.{Parser, Result}
+  alias GoogleCrawler.Search.{GoogleClient, Parser, Result}
 
   describe "parse/1" do
     test "parses the html response" do
-      use_cassette "search/keyword_travel" do
-        %{body: body} = HTTPoison.get!("https://www.google.com/search?q=travel")
+      use_cassette "search/keyword_hotels" do
+        %{body: body} = GoogleClient.search("hotels")
 
         result = Parser.parse(body)
 
+        top_ad_urls = ["https://www.hotels.com/", "https://www.booking.com/"]
+        all_ad_urls = ["https://www.hotels.com/", "https://www.booking.com/"]
+
         non_ad_urls = [
-          "/url?q=https://dict.longdo.com/search/travel&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjADegQICRAB&usg=AOvVaw0n5duBo5ucMSUadqH-fZgr",
-          "/url?q=https://dict.longdo.com/search/*travel*&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjAEegQIChAB&usg=AOvVaw1Ox3nl1D-0hwRpMSbJdlxV",
-          "/url?q=https://www.thaitravelcenter.com/th/&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjAFegQIBxAB&usg=AOvVaw36a2QmmrNrhMZqnTgUafcc",
-          "/url?q=https://www.traveloka.com/th-th/&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjAGegQICBAB&usg=AOvVaw1WpSWSECPGMMjZOfij-lrZ",
-          "/url?q=https://www.tourismthailand.org/home&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjAHegQIBhAB&usg=AOvVaw1NnwtDiwwZIHfrYxGxX4nY",
-          "/url?q=https://travel.mthai.com/&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjAIegQIABAB&usg=AOvVaw1GzJnQlsqYcjJ2BNt3tYNB",
-          "/url?q=https://www.sanook.com/travel/&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjAJegQIBBAB&usg=AOvVaw3xncv4ItKKKywBczTEH7S3",
-          "/url?q=https://dictionary.sanook.com/search/dict-en-th-sedthabut/travel&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjAKegQIARAB&usg=AOvVaw1bCbhEgGxpOTTen41ITWLK",
-          "/url?q=https://www.bangkokpost.com/travel/&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjALegQIAhAB&usg=AOvVaw25BT4bQn59-rsF5haX_7SW",
-          "/url?q=https://jittawealth.com/thematic/TRAVEL-TECH&sa=U&ved=2ahUKEwjl2KHe2vXwAhVWRzABHXT8C-YQFjAMegQIAxAB&usg=AOvVaw2vFHiV3I5DkNVAT4B8yH7v"
+          "https://www.hotels.com/",
+          "https://www.booking.com/city/th/bangkok.html",
+          "https://www.agoda.com/city/bangkok-th.html",
+          "https://www.tripadvisor.com/Hotels-g293916-Bangkok-Hotels.html",
+          "https://www.hotelscombined.com/Place/Bangkok.htm",
+          "https://santorinidave.com/best-hotels-bangkok",
+          "https://www.trip.com/hotels/bangkok-hotels-list-359/",
+          "https://www.hotels2thailand.com/",
+          "https://asq.in.th/",
+          "https://www.expedia.co.th/en/Bangkok-Hotels.d178236.Travel-Guide-Hotels"
         ]
 
         assert %Result{
                  html_code: _,
-                 links_count: 49,
-                 all_ads: [],
+                 links_count: 91,
+                 all_ads: ^top_ad_urls,
                  non_ads: ^non_ad_urls,
-                 top_ads: []
+                 top_ads: ^all_ad_urls
                } = result
       end
     end

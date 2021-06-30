@@ -7,9 +7,9 @@ defmodule GoogleCrawlerWeb.Upload.ViewKeywordDetailPageTest do
 
     result = %Result{
       links_count: 20,
-      all_ads: [],
+      all_ads: ["www.hotels.com", "www.agoda.com"],
       non_ads: ["www.wikipedia.com"],
-      top_ads: [],
+      top_ads: ["www.hotels.com"],
       html_code: ""
     }
 
@@ -20,8 +20,8 @@ defmodule GoogleCrawlerWeb.Upload.ViewKeywordDetailPageTest do
     |> visit(Routes.keyword_path(GoogleCrawlerWeb.Endpoint, :show, keyword_id))
     |> assert_has(Query.text("travel"))
     |> assert_has(Query.text("Links Count"))
-    |> assert_has(Query.text("Top Ads"))
-    |> assert_has(Query.text("Total Ads"))
+    |> assert_has(Query.text("Top Ad Urls"))
+    |> assert_has(Query.text("All Ad Urls"))
     |> assert_has(css(".table"))
   end
 end
