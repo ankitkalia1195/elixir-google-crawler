@@ -4,7 +4,7 @@ defmodule GoogleCrawlerWeb.Api.UploadControllerTest do
   alias GoogleCrawler.Search.Keyword
 
   describe "POST create/2" do
-    test "creates the keywords when file is succesfully processed", %{conn: conn} do
+    test "creates the keywords when file is successfully processed", %{conn: conn} do
       user = insert(:user)
       token = insert(:user_token, user: user, context: "api")
       upload = %Plug.Upload{path: "test/support/fixtures/csv/valid.csv", filename: "upload.csv"}
@@ -16,7 +16,7 @@ defmodule GoogleCrawlerWeb.Api.UploadControllerTest do
       assert Repo.aggregate(Keyword, :count) == 2
     end
 
-    test "returns success message in meta when file is succesfully processed", %{conn: conn} do
+    test "returns success message in meta when file is successfully processed", %{conn: conn} do
       user = insert(:user)
       token = insert(:user_token, user: user, context: "api")
       upload = %Plug.Upload{path: "test/support/fixtures/csv/valid.csv", filename: "upload.csv"}
@@ -27,11 +27,11 @@ defmodule GoogleCrawlerWeb.Api.UploadControllerTest do
         |> post(Routes.api_upload_path(conn, :create), %{upload: %{file: upload}})
 
       assert json_response(result_conn, 201) == %{
-               "meta" => [%{"detail" => "File Processed successfully"}]
+               "meta" => %{"detail" => "File Processed successfully"}
              }
     end
 
-    test "does NOT create keywords when file is NOT succesfully processed", %{conn: conn} do
+    test "does NOT create keywords when file is NOT successfully processed", %{conn: conn} do
       user = insert(:user)
       token = insert(:user_token, user: user, context: "api")
 
@@ -47,7 +47,7 @@ defmodule GoogleCrawlerWeb.Api.UploadControllerTest do
       assert Repo.aggregate(Keyword, :count) == 0
     end
 
-    test "returns error message when file is NOT succesfully processed", %{conn: conn} do
+    test "returns error message when file is NOT successfully processed", %{conn: conn} do
       user = insert(:user)
       token = insert(:user_token, user: user, context: "api")
       upload = %Plug.Upload{path: "test/support/fixtures/csv/invalid.csv", filename: "upload.csv"}

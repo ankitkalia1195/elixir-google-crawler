@@ -3,11 +3,9 @@ defmodule GoogleCrawlerWeb.Api.SuccessView do
 
   def render("show.json", %{message: message}) do
     %{
-      meta: [
-        %{
-          detail: message
-        }
-      ]
+      meta: %{
+        detail: message
+      }
     }
   end
 end
