@@ -5,7 +5,7 @@ defmodule GoogleCrawler.Search.KeywordWorker do
     unique: [period: 30]
 
   alias GoogleCrawler.Repo
-  alias GoogleCrawler.Search.{Keyword, Parser}
+  alias GoogleCrawler.Search.{GoogleClient, Keyword, Parser}
 
   @impl Worker
   def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}}) do
@@ -23,7 +23,8 @@ defmodule GoogleCrawler.Search.KeywordWorker do
   end
 
   defp parsed_result!(keyword) do
-    response = HTTPoison.get!("https://www.google.com/search?q=#{keyword.name}")
+    response = GoogleClient.search(keyword.name)
+
     Parser.parse(response.body)
   end
 end

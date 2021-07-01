@@ -7,12 +7,24 @@
       <td> <%= @keyword.result.links_count %> </td>
     </tr>
     <tr>
-      <td> Top Ads </td>
-      <td> <%= @keyword.result.top_ads |> Enum.count() %> </td>
+      <td> Top Ad Urls </td>
+      <td>
+        <ul>
+          <%= for url <- @keyword.result.top_ads do %>
+            <li><%= link url, to: url %></li>
+          <% end %>
+        </ul>
+      </td>
     </tr>
     <tr>
-      <td> Total Ads </td>
-      <td> <%= @keyword.result.all_ads |> Enum.count() %> </td>
+      <td> All Ad Urls </td>
+      <td>
+        <ul>
+          <%= for url <- @keyword.result.all_ads do %>
+            <li><%= link url, to: url %></li>
+          <% end %>
+        </ul>
+      </td>
     </tr>
 
     <tr>
@@ -24,7 +36,7 @@
           <% end %>
         </ul>
       </td>
-      <td> <%= @keyword.result.non_ads |> Enum.join(",") %> </td>
+
     </tr>
   </table>
 <% else %>
