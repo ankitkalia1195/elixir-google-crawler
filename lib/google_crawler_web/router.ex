@@ -46,6 +46,12 @@ defmodule GoogleCrawlerWeb.Router do
     resources "/keywords", Api.KeywordController, only: [:show, :index]
   end
 
+  scope "/api", GoogleCrawlerWeb, as: :api do
+    pipe_through [:authenticate_user_by_token]
+
+    resources "/uploads", Api.UploadController, only: [:create]
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put

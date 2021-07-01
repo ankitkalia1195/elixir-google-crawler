@@ -11,7 +11,6 @@ defmodule GoogleCrawlerWeb.Api.KeywordControllerTest do
 
       result_conn =
         conn
-        |> log_in_user(user)
         |> put_req_header("x-token", Base.encode64(token.token))
         |> get(Routes.api_keyword_path(conn, :index))
 
@@ -48,7 +47,6 @@ defmodule GoogleCrawlerWeb.Api.KeywordControllerTest do
 
       result_conn =
         conn
-        |> log_in_user(user)
         |> put_req_header("x-token", Base.encode64(token.token))
         |> get(Routes.api_keyword_path(conn, :index), %{
           "filter" => %{"min_links_count" => 2, "max_links_count" => 4}
@@ -67,7 +65,6 @@ defmodule GoogleCrawlerWeb.Api.KeywordControllerTest do
 
       result_conn =
         conn
-        |> log_in_user(user)
         |> put_req_header("x-token", Base.encode64(token.token))
         |> get(Routes.api_keyword_path(conn, :index), %{"filter" => %{"term" => "lan"}})
 
