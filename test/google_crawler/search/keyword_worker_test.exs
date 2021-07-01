@@ -4,24 +4,24 @@ defmodule GoogleCrawler.Search.KeywordWorkerTest do
 
   describe "perform/1" do
     test "creates the results" do
-      use_cassette "search/keyword_travel" do
+      use_cassette "search/keyword_hotels" do
         user = insert(:user)
-        keyword = insert(:keyword, name: "travel", user: user)
+        keyword = insert(:keyword, name: "hotels", user: user)
 
         KeywordWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword.id}})
 
         result = Repo.reload(keyword).result
 
-        assert result.all_ads == []
-        assert result.top_ads == []
-        assert result.links_count == 49
+        assert result.all_ads == ["https://www.hotels.com/", "https://www.booking.com/"]
+        assert result.top_ads == ["https://www.hotels.com/", "https://www.booking.com/"]
+        assert result.links_count == 91
       end
     end
 
     test "updates the status of keyword" do
-      use_cassette "search/keyword_travel" do
+      use_cassette "search/keyword_hotels" do
         user = insert(:user)
-        keyword = insert(:keyword, name: "travel", user: user)
+        keyword = insert(:keyword, name: "hotels", user: user)
 
         KeywordWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword.id}})
         reloaded_keyword = Repo.reload(keyword)
