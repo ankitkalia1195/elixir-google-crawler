@@ -1,5 +1,5 @@
 <div class="col-6 offset-4">
-  <div class = "upload__form">
+  <div class="upload__form">
     <h3>Upload a new file!</h3>
     <%= form_for @conn, "/uploads", [as: :upload, multipart: true], fn f -> %>
       <div class="form-group">
